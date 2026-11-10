@@ -35,7 +35,7 @@ async function main() {
       // Users
       // -----------------------------------------------------------------------
 
-      const users = await User.create(
+      const users = await User.insertMany(
         [
           {
             name: "Ali Jawad",
@@ -62,7 +62,7 @@ async function main() {
       // Workspaces
       // -----------------------------------------------------------------------
 
-      const workspaces = await Workspace.create(
+      const workspaces = await Workspace.insertMany(
         [
           {
             name: "Main Workspace",
@@ -127,17 +127,17 @@ async function main() {
           {
             name: "Main Project",
             shortKey: "MP",
-            workspaceId: workspace1._id,
+            workspace: workspace1._id,
           },
           {
             name: "Secondary Project",
             shortKey: "SP",
-            workspaceId: workspace1._id,
+            workspace: workspace1._id,
           },
           {
             name: "Workspace 2 Project",
             shortKey: "W2P",
-            workspaceId: workspace2._id,
+            workspace: workspace2._id,
           },
         ],
         { session },
@@ -153,78 +153,78 @@ async function main() {
         [
           {
             title: "Main Task",
-            reporterId: user1._id,
-            projectId: project1._id,
+            reporter: user1._id,
+            project: project1._id,
           },
           {
             title: "Build authentication",
-            reporterId: user1._id,
-            assigneeId: user2._id,
-            projectId: project1._id,
+            reporter: user1._id,
+            assignee: user2._id,
+            project: project1._id,
             status: "IN_PROGRESS",
             priority: "HIGH",
           },
           {
             title: "Create dashboard",
-            reporterId: user1._id,
-            assigneeId: user3._id,
-            projectId: project1._id,
+            reporter: user1._id,
+            assignee: user3._id,
+            project: project1._id,
           },
           {
             title: "Add task filtering",
-            reporterId: user2._id,
-            assigneeId: user1._id,
-            projectId: project1._id,
+            reporter: user2._id,
+            assignee: user1._id,
+            project: project1._id,
             priority: "LOW",
           },
           {
             title: "Implement pagination",
-            reporterId: user2._id,
-            assigneeId: user3._id,
-            projectId: project1._id,
+            reporter: user2._id,
+            assignee: user3._id,
+            project: project1._id,
             status: "IN_PROGRESS",
             priority: "HIGH",
           },
           {
             title: "Add search functionality",
-            reporterId: user3._id,
-            assigneeId: user2._id,
-            projectId: project1._id,
+            reporter: user3._id,
+            assignee: user2._id,
+            project: project1._id,
             status: "DONE",
           },
           {
             title: "Validate task input",
-            reporterId: user1._id,
-            assigneeId: user2._id,
-            projectId: project1._id,
+            reporter: user1._id,
+            assignee: user2._id,
+            project: project1._id,
             status: "DONE",
             priority: "HIGH",
           },
           {
             title: "Handle task permissions",
-            reporterId: user3._id,
-            projectId: project1._id,
+            reporter: user3._id,
+            project: project1._id,
             priority: "HIGH",
           },
           {
             title: "Improve error handling",
-            reporterId: user2._id,
-            assigneeId: user1._id,
-            projectId: project1._id,
+            reporter: user2._id,
+            assignee: user1._id,
+            project: project1._id,
             status: "IN_PROGRESS",
             priority: "LOW",
           },
           {
             title: "Add sorting",
-            reporterId: user1._id,
-            assigneeId: user3._id,
-            projectId: project1._id,
+            reporter: user1._id,
+            assignee: user3._id,
+            project: project1._id,
           },
           {
             title: "Write API documentation",
-            reporterId: user3._id,
-            assigneeId: user1._id,
-            projectId: project1._id,
+            reporter: user3._id,
+            assignee: user1._id,
+            project: project1._id,
             status: "TODO",
             priority: "LOW",
           },
@@ -238,7 +238,7 @@ async function main() {
       // Comments
       // -----------------------------------------------------------------------
 
-      await Comment.create(
+      await Comment.insertMany(
         [
           {
             comment: "Some comment",
@@ -286,7 +286,7 @@ async function main() {
 }
 
 mongoose
-  .connect(process.env.MONGODB_URI!)
+  .connect(env.mongoUri)
   .then(main)
   .catch((error) => {
     console.error("Database connection failed:", error);
