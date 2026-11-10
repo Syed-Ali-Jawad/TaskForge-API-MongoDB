@@ -1,0 +1,11 @@
+node_modules
+# Keep environment variables out of version control
+.env
+*.md
+
+dist
+
+/src/generated/prisma
+
+# Local npm cache used by tooling
+.npm-cache/
